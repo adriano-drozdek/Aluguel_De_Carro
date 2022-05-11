@@ -29,4 +29,7 @@ public class Invoice {
 		this.tax = tax;
 	}
 
+	public Double totalPayment() {
+		return getBasicPayment() + getTax();
+	}
 }
