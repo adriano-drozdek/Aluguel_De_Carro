@@ -1,6 +1,7 @@
 package model.services;
 
 import model.entities.CarRental;
+import model.entities.Invoice;
 
 public class RentalService {
 
@@ -25,8 +26,13 @@ public class RentalService {
 		double basicPayment;
 		if (hours <= 12.0) {
 			basicPayment = Math.ceil(hours) * pricePerHour;
-		} else {
+		} 
+		else {
 			basicPayment = Math.ceil(hours / 24) * pricePerDay;
 		}
+
+		double tax = taxService.tax(basicPayment);
+
+		carRental.setInvoice(new Invoice(basicPayment, tax));
 	}
 }
